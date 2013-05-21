@@ -52,7 +52,7 @@ class FeedFilter
   private
 
   def download(url)
-    open(url) do |rss|
+    open(url, 'User-Agent' => 'feed_filter') do |rss|
       feed = RSS::Parser.parse(rss, false, false)
       @content_type = rss.content_type
       return feed

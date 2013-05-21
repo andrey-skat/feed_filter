@@ -1,6 +1,7 @@
 
 FeedFilter.configure do
 
+  #show only AVC and bigger than 2GB
   feed 'http://feed.rutracker.org/atom/f/2093.atom' do |item|
 
     m = /\[([0-9]*\.[0-9]*) gb\]/i.match(item.title.to_s)
@@ -10,6 +11,13 @@ FeedFilter.configure do
       false
     end
 
+  end
+
+  #filter out only those articles that mention Ruby
+  #block gets article object as parameter
+  #if block return false, then article would be excluded
+  feed 'http://habrahabr.ru/rss/hubs/' do |item|
+    item.title.to_s =~ /ruby/i
   end
 
 end
